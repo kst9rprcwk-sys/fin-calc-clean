@@ -1,0 +1,344 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#302a27"><title>Financial Calculator Pro</title><style>
+:root{font-family:Arial,Helvetica,sans-serif;background:#171717;color:#f4f4f4}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:12px 8px}.calculator{width:min(100%,390px);padding:16px 11px 19px;background:linear-gradient(120deg,#38322f,#292523 40%,#3c3633);border:2px solid #5a514c;border-radius:18px 18px 28px 28px;box-shadow:inset 0 1px 2px #81756a,0 15px 45px #000a}.screen-wrap{padding:4px;background:#77736a;border:2px solid #a49b8a;border-radius:7px;margin:0 1px 14px;box-shadow:inset 0 2px 4px #0008}.screen{height:88px;background:linear-gradient(145deg,#8da96a,#9eb77b);border:2px solid #4d633c;border-radius:4px;padding:6px 9px;color:#1b3220;box-shadow:inset 0 2px 8px #536845}.screen .top{display:flex;justify-content:space-between;font-size:10px;font-weight:700;letter-spacing:.04em}.screen .digits{text-align:right;font-family:Consolas,Monaco,monospace;font-size:clamp(23px,8vw,37px);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.25}.screen .hint{text-align:right;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.screen .periods{font-size:9px;text-align:left}.keys{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px 5px}.key{position:relative;min-width:0;min-height:47px;border:1px solid #131414;border-bottom:3px solid #151515;border-radius:8px;background:linear-gradient(#555b60,#373d43);color:#fff;font-size:16px;font-weight:700;cursor:pointer;touch-action:manipulation;box-shadow:inset 0 1px 1px #a2a7a8,0 2px 2px #100f0e;display:flex;align-items:center;justify-content:center;padding:10px 2px 2px}.key:active{transform:translateY(2px);border-bottom-width:1px}.key:focus-visible{outline:2px solid #ffa335;outline-offset:1px}.key.selected{box-shadow:0 0 0 2px #ffad35,inset 0 1px 1px #aaa}.key .alt{position:absolute;top:-1px;left:1px;right:1px;text-align:center;color:#ffa52c;font-size:8px;font-weight:800;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:clip}.key .label{line-height:1}.key.tvm{background:linear-gradient(#61666a,#41474c);flex-direction:column;gap:2px;padding-top:3px}.key.tvm .stored{font:600 10px Consolas,monospace;color:#e6f4dc;max-width:98%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.1}.key.tvm .label{font-size:14px}.key.orange{background:linear-gradient(#f9aa3c,#c7781d);color:#fff;border-color:#593817}.key.dark{background:linear-gradient(#44484c,#272a2e)}.key.num{background:linear-gradient(#85888c,#62666a)}.key.equal{grid-column:5;grid-row:8 / span 2;background:linear-gradient(#4e5458,#31363b);font-size:21px}.key.empty{opacity:.6;cursor:default}.keys .row1{grid-row:1}.keys .row2{grid-row:2}.keys .row3{grid-row:3}.keys .row4{grid-row:4}.keys .row5{grid-row:5}.keys .row6{grid-row:6}.keys .row7{grid-row:7}.keys .row8{grid-row:8}.keys .row9{grid-row:9}.caption{font-size:11px;line-height:1.45;color:#d1c9c2;margin:15px 4px 0}.disclosure{font-size:10px;color:#b9b0a7;margin:7px 4px 0}@media(max-width:340px){.calculator{padding:12px 7px}.keys{gap:6px 3px}.key{min-height:43px;font-size:14px}.key .alt{font-size:7px}.key.tvm .stored{font-size:9px}}
+ .work-menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;margin-top:12px}.work-menu button{background:#41464a;color:#fff;border:1px solid #7b8183;border-radius:7px;padding:8px 4px;font-size:11px;cursor:pointer}.work-menu button:focus-visible{outline:2px solid orange}  .extra-panel{margin-top:9px;border:1px solid #71645b;border-radius:7px;padding:8px;color:#f1e7db;font-size:12px}.extra-panel summary{cursor:pointer;font-weight:bold}.extra-panel label{display:block;margin:5px 0}.extra-panel input,.extra-panel select,.extra-panel textarea{display:block;width:100%;background:#dce7d4;color:#14221b;border:1px solid #8fa589;border-radius:4px;padding:5px;font:inherit}.extra-panel button{background:#464a4b;color:white;border:1px solid #8d8d8d;border-radius:6px;padding:7px;cursor:pointer}.extra-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}.extra-panel output{display:block;margin-top:7px;line-height:1.5;overflow-wrap:anywhere} .guide{margin:0 0 13px;padding:10px;border:1px solid #a8844c;border-radius:8px;background:#282725;color:#f5eee4;font-size:12px;line-height:1.5}.guide>summary{cursor:pointer;color:#ffcf8c;font-weight:bold;font-size:14px}.guide h2{font-size:13px;color:#ffcf8c;margin:14px 0 5px}.guide p{margin:6px 0}.guide ul,.guide ol{padding-left:20px}.guide li{margin:5px 0}.guide .scroll{overflow-x:auto}.guide table{border-collapse:collapse;min-width:630px;width:100%;font-size:11px}.guide th,.guide td{padding:6px;text-align:left;vertical-align:top;border-bottom:1px solid #514b45}.guide thead th{background:#46413b}.guide tbody th{color:#e1f4db;white-space:nowrap}</style><link rel="manifest" href="./manifest.json"><link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="FinCalc Pro"><meta name="description" content="Offline financial calculator with a built-in key and worksheet guide."></head><body><main class="calculator" aria-label="Financial calculator"><div class="screen-wrap"><div class="screen" role="status" aria-live="polite"><div class="top"><span id="mode">READY</span><span id="periods">P/Y 1 · C/Y 1 · END</span></div><div id="digits" class="digits">0.00</div><div id="hint" class="hint">Enter a value, then tap a TVM key to store it.</div></div></div><details class="guide" id="button-guide"><summary>How to use every button and worksheet</summary>
+<p><strong>Instructions for this HTML version:</strong> Press 2ND then another key for its orange label. This version is not an exact physical-calculator emulator. The small number above each TVM key is its stored value.</p>
+<h2>Quick start: loan payment</h2><ol><li>For monthly payments, press 2ND + I/Y, type 12 and ENTER to set P/Y. Use an arrow to select C/Y if needed; enter it and press ENTER. Press CE/C to leave settings.</li><li>Type each known value then its TVM key: N (periods), I/Y (annual rate as a percent), PV (loan amount), PMT (payment), FV (ending balance). Give cash paid out a negative sign.</li><li>Press CPT then the unknown TVM key to solve. For example, after storing N, I/Y, PV and FV, press CPT then PMT. Press RCL then a TVM key to inspect its stored value.</li></ol>
+<h2>Every keypad button</h2><p>Read the third column as “press 2ND, then this key.”</p><div class="scroll"><table><thead><tr><th>Key</th><th>Normal press</th><th>After 2ND</th></tr></thead><tbody><tr><th scope="row">CPT</th><td>Compute selected TVM variable after CPT, or a worksheet result</td><td>QUIT: exit worksheet</td></tr><tr><th scope="row">ENTER</th><td>Store typed worksheet value or accept current entry</td><td>SET: with Display format open, toggle US/European separators</td></tr><tr><th scope="row">↑</th><td>Previous worksheet field</td><td>DEL: delete selected cash-flow group in CF</td></tr><tr><th scope="row">↓</th><td>Next worksheet field</td><td>INS: insert cash-flow group in CF</td></tr><tr><th scope="row">⌫</th><td>Delete last typed character</td><td>RESET: request full reset; ENTER confirms, CE/C cancels</td></tr><tr><th scope="row">2ND</th><td>Select orange second function; press again to cancel</td><td>No second function</td></tr><tr><th scope="row">CF</th><td>Open cash-flow entries CFo, C01/F01, etc.</td><td>xP/Y: multiply display by payments per year; tap N to store</td></tr><tr><th scope="row">NPV</th><td>Open discount rate I, NPV, NFV, PB and DPB</td><td>AMORT: open amortization worksheet</td></tr><tr><th scope="row">IRR</th><td>Open IRR, reinvestment rate RI and MOD</td><td>BOND: focus bond panel</td></tr><tr><th scope="row">→</th><td>Next field in a worksheet</td><td>DATE: focus date panel</td></tr><tr><th scope="row">N</th><td>Store displayed number of payment periods</td><td>xP/Y: multiply display by P/Y</td></tr><tr><th scope="row">I/Y</th><td>Store annual interest rate in percent</td><td>P/Y: set payments/year, then use arrows for C/Y</td></tr><tr><th scope="row">PV</th><td>Store present value</td><td>AMORT: open amortization worksheet</td></tr><tr><th scope="row">PMT</th><td>Store periodic payment; outflows should be negative</td><td>BGN: toggle beginning/end payment timing</td></tr><tr><th scope="row">FV</th><td>Store future value</td><td>CLR TVM: clear the five TVM values only</td></tr><tr><th scope="row">x²</th><td>Square the displayed number</td><td>x!: factorial, integer 0–69</td></tr><tr><th scope="row">ln</th><td>Natural logarithm</td><td>SIN: sine; use INV for inverse sine</td></tr><tr><th scope="row">1/x</th><td>Reciprocal</td><td>COS: cosine; use INV for inverse cosine</td></tr><tr><th scope="row">√x</th><td>Square root</td><td>TAN: tangent; use INV for inverse tangent</td></tr><tr><th scope="row">÷</th><td>Divide by next number</td><td>RAND: random value between 0 and 1</td></tr><tr><th scope="row">INV</th><td>Toggle inverse trig mode</td><td>HYP: toggle hyperbolic trig mode</td></tr><tr><th scope="row">(</th><td>Open parenthesis</td><td>SIN⁻¹: inverse sine</td></tr><tr><th scope="row">)</th><td>Close parenthesis</td><td>COS⁻¹: inverse cosine</td></tr><tr><th scope="row">yˣ</th><td>Raise base to exponent</td><td>TAN⁻¹: inverse tangent</td></tr><tr><th scope="row">×</th><td>Multiply</td><td>No second function</td></tr><tr><th scope="row">LN</th><td>Natural logarithm (same as ln)</td><td>DATA: focus statistics panel</td></tr><tr><th scope="row">7</th><td>Enter digit 7</td><td>STAT: focus statistics panel</td></tr><tr><th scope="row">8</th><td>Enter digit 8</td><td>BOND: focus bond panel</td></tr><tr><th scope="row">9</th><td>Enter digit 9</td><td>No second function; depreciation omitted</td></tr><tr><th scope="row">−</th><td>Subtract</td><td>No second function</td></tr><tr><th scope="row">STO</th><td>Store displayed value: STO then digit 0–9</td><td>ROUND: round internal number to selected decimal places</td></tr><tr><th scope="row">4</th><td>Enter digit 4</td><td>ROUND: also rounds to selected decimal places</td></tr><tr><th scope="row">5</th><td>Enter digit 5</td><td>Δ%: percent-change/compound-growth worksheet</td></tr><tr><th scope="row">6</th><td>Enter digit 6</td><td>BRKEVN: breakeven worksheet</td></tr><tr><th scope="row">+</th><td>Add</td><td>No second function</td></tr><tr><th scope="row">RCL</th><td>Recall memory: RCL then digit; or recall TVM: RCL then TVM key</td><td>CLR WORK: clear current worksheet where supported</td></tr><tr><th scope="row">1</th><td>Enter digit 1</td><td>MEM: open ten-register memory worksheet</td></tr><tr><th scope="row">2</th><td>Enter digit 2</td><td>FORMAT: open decimal and number-separator controls</td></tr><tr><th scope="row">3</th><td>Enter digit 3</td><td>RESET: request full reset; ENTER confirms</td></tr><tr><th scope="row">=</th><td>Finish arithmetic</td><td>No second function</td></tr><tr><th scope="row">CE/C</th><td>Clear entry; second press clears pending arithmetic; in worksheet exits</td><td>CLR WORK: clear current worksheet where supported</td></tr><tr><th scope="row">0</th><td>Enter digit 0</td><td>No second function</td></tr><tr><th scope="row">.</th><td>Decimal point</td><td>No second function</td></tr><tr><th scope="row">+/-</th><td>Change sign</td><td>No second function</td></tr></tbody></table></div>
+<h2>Worksheet and panel instructions</h2><ul>
+<li><strong>CF:</strong> Enter initial CFo and ENTER; ↓ to C01, enter the amount and ENTER; ↓ to F01, enter its repetition count and ENTER. Repeat for C02/F02 and later groups. Use 2ND + ↑/↓ to delete/insert a group.</li>
+<li><strong>NPV / IRR:</strong> NPV opens discount rate I; type a percent and ENTER, then use ↓ to see NPV, NFV, payback PB and discounted payback DPB. IRR shows the internal rate; ↓ to RI to enter reinvestment rate and ↓ to MOD for modified return.</li>
+<li><strong>AMORT:</strong> Press 2ND + PV or 2ND + NPV. Enter P1 (first payment) and P2 (last payment) with ENTER; ↓ shows BAL (balance), PRN (principal) and INT (interest). Stored TVM values and BGN/END setting supply the loan terms.</li>
+<li><strong>Interest conversion:</strong> Open its button below the keypad. Enter NOM (nominal annual rate) and C/Y (compounding periods), then navigate to EFF and press CPT. Enter EFF and CPT on NOM to reverse the conversion.</li>
+<li><strong>Profit margin:</strong> Enter two of CST (cost), SEL (selling price) and MAR (gross margin percent); navigate to the unknown and press CPT. Margin uses selling price as its denominator.</li>
+<li><strong>Percent change:</strong> OLD is starting value, NEW is ending value, CH is change per period in percent, PD is number of periods. Enter known values and CPT on the unknown. Leave PD at 1 for a single-period change.</li>
+<li><strong>Breakeven:</strong> FC is fixed cost, VC variable cost per unit, P price per unit, PFT target profit and Q quantity. Enter known values and CPT on the unknown. PFT=0 gives breakeven quantity.</li>
+<li><strong>Date panel:</strong> Enter start/end dates, choose Actual or 30/360, and press Days between. Enter a number of days and press Add days to start to compute a date using actual calendar days.</li>
+<li><strong>Statistics panel:</strong> Enter one X,Y pair per line, choose LIN, LN, EXP, PWR or 1-V, and press Compute statistics. Results include count, means, deviations and sums; regression adds coefficients and correlation.</li>
+<li><strong>Bond panel:</strong> Enter settlement/redemption dates, annual coupon percent, redemption value per $100, coupon frequency, day-count method and yield. Price returns PRI (clean price), AI (accrued interest) and DUR (modified duration). Enter a clean price and press Yield to solve yield.</li>
+<li><strong>Memory:</strong> Type a value, press STO, then digit 0–9. Press RCL then that digit to recall it. 2ND + 1 opens the memory worksheet.</li>
+<li><strong>Display format:</strong> Open Display format below or press 2ND + 2. Choose 0–8 decimals or Floating and US/European separators. Formatting does not round internally stored TVM values; ROUND does.</li>
+<li><strong>Scientific strip:</strong> eˣ, x!, π, ANS, sin/cos/tan and DEG/RAD act on the displayed value. INV before trig selects inverse; 2ND + INV selects hyperbolic. For nCr/nPr, type n, tap the operation, type r, then =. For CONST, type first value, operator, constant, tap CONST then =; type a new value and = to reuse it. % divides by 100, or applies the percentage to the first number during +/−.</li>
+</ul><p><strong>Scope:</strong> Depreciation is omitted. Some functions use panels rather than physical key sequences. The file works offline but is not an installable PWA.</p></details><p id="offline-status" role="status" aria-live="polite" style="font-size:11px;color:#e4efdc;margin:0 2px 12px">Preparing offline access…</p><div class="keys" id="keys"><button type="button" class="key row1 dark" data-act="cpt" ><span class="alt">QUIT</span><span class="label">CPT</span></button><button type="button" class="key row1 dark" data-act="enter" ><span class="alt">SET</span><span class="label">ENTER</span></button><button type="button" class="key row1 dark" data-act="up" ><span class="alt">DEL</span><span class="label">↑</span></button><button type="button" class="key row1 dark" data-act="down" ><span class="alt">INS</span><span class="label">↓</span></button><button type="button" class="key row1 dark" data-act="back" ><span class="alt">RESET</span><span class="label">⌫</span></button><button type="button" class="key row2 orange" data-act="second" ><span class="label">2ND</span></button><button type="button" class="key row2 dark" data-act="cf" ><span class="alt">xP/Y</span><span class="label">CF</span></button><button type="button" class="key row2 dark" data-act="npv" ><span class="alt">AMORT</span><span class="label">NPV</span></button><button type="button" class="key row2 dark" data-act="irr" ><span class="alt">BOND</span><span class="label">IRR</span></button><button type="button" class="key row2 dark" data-act="right" ><span class="alt">DATE</span><span class="label">→</span></button><button type="button" class="key row3 tvm" data-tvm="N" ><span class="alt">xP/Y</span><span class="stored" data-value="N">0</span><span class="label">N</span></button><button type="button" class="key row3 tvm" data-tvm="IY" ><span class="alt">P/Y</span><span class="stored" data-value="IY">0</span><span class="label">I/Y</span></button><button type="button" class="key row3 tvm" data-tvm="PV" ><span class="alt">AMORT</span><span class="stored" data-value="PV">0</span><span class="label">PV</span></button><button type="button" class="key row3 tvm" data-tvm="PMT" ><span class="alt">BGN</span><span class="stored" data-value="PMT">0</span><span class="label">PMT</span></button><button type="button" class="key row3 tvm" data-tvm="FV" ><span class="alt">CLR TVM</span><span class="stored" data-value="FV">0</span><span class="label">FV</span></button><button type="button" class="key row4 dark" data-act="square" ><span class="alt">x!</span><span class="label">x²</span></button><button type="button" class="key row4 dark" data-act="ln" ><span class="alt">SIN</span><span class="label">ln</span></button><button type="button" class="key row4 dark" data-act="recip" ><span class="alt">COS</span><span class="label">1/x</span></button><button type="button" class="key row4 dark" data-act="sqrt" ><span class="alt">TAN</span><span class="label">√x</span></button><button type="button" class="key row4 dark" data-op="/" ><span class="alt">RAND</span><span class="label">÷</span></button><button type="button" class="key row5 dark" data-act="sci:inv" ><span class="alt">HYP</span><span class="label">INV</span></button><button type="button" class="key row5 dark" data-act="lparen" ><span class="alt">SIN⁻¹</span><span class="label">(</span></button><button type="button" class="key row5 dark" data-act="rparen" ><span class="alt">COS⁻¹</span><span class="label">)</span></button><button type="button" class="key row5 dark" data-op="^" ><span class="alt">TAN⁻¹</span><span class="label">yˣ</span></button><button type="button" class="key row5 dark" data-op="*" ><span class="label">×</span></button><button type="button" class="key row6 dark" data-act="ln" ><span class="alt">DATA</span><span class="label">LN</span></button><button type="button" class="key row6 num" data-digit="7" ><span class="alt">STAT</span><span class="label">7</span></button><button type="button" class="key row6 num" data-digit="8" ><span class="alt">BOND</span><span class="label">8</span></button><button type="button" class="key row6 num" data-digit="9" ><span class="label">9</span></button><button type="button" class="key row6 dark" data-op="-" ><span class="label">−</span></button><button type="button" class="key row7 dark" data-act="sto" ><span class="alt">ROUND</span><span class="label">STO</span></button><button type="button" class="key row7 num" data-digit="4" ><span class="label">4</span></button><button type="button" class="key row7 num" data-digit="5" ><span class="alt">Δ%</span><span class="label">5</span></button><button type="button" class="key row7 num" data-digit="6" ><span class="alt">BRKEVN</span><span class="label">6</span></button><button type="button" class="key row7 dark" data-op="+" ><span class="label">+</span></button><button type="button" class="key row8 dark" data-act="rcl" ><span class="alt">CLR WORK</span><span class="label">RCL</span></button><button type="button" class="key row8 num" data-digit="1" ><span class="alt">MEM</span><span class="label">1</span></button><button type="button" class="key row8 num" data-digit="2" ><span class="alt">FORMAT</span><span class="label">2</span></button><button type="button" class="key row8 num" data-digit="3" ><span class="alt">RESET</span><span class="label">3</span></button><button type="button" class="key row8 equal" data-act="equals" ><span class="label">=</span></button><button type="button" class="key row9 dark" data-act="ce" ><span class="label">CE/C</span></button><button type="button" class="key row9 num" data-digit="0" ><span class="label">0</span></button><button type="button" class="key row9 num" data-digit="." ><span class="label">.</span></button><button type="button" class="key row9 num" data-act="sign" ><span class="label">+/-</span></button></div><div class="work-menu" id="work-menu" aria-label="Additional worksheets"><button type="button" data-work="CONV">Interest conversion</button><button type="button" data-work="MARGIN">Profit margin</button><button type="button" data-work="PCT">Percent change</button><button type="button" data-work="BREAK">Breakeven</button></div><details class="extra-panel"><summary>Date worksheet</summary><div class="extra-grid"><label>Start date<input id="date-start" type="date" value="2003-09-04"></label><label>End date<input id="date-end" type="date" value="2003-11-01"></label><label>Day count<select id="date-method"><option value="ACT">Actual</option><option value="360">30/360</option></select></label><label>Days to add<input id="date-days" type="number" value="58"></label><button id="date-days-button" type="button">Days between</button><button id="date-add-button" type="button">Add days to start</button></div><output id="date-result"></output></details><details class="extra-panel"><summary>Statistics worksheet</summary><label>One X,Y pair per line (maximum 50)<textarea id="stats-input" rows="4" placeholder="1,2&#10;2,4&#10;3,6"></textarea></label><label>Model<select id="stats-model"><option>LIN</option><option>LN</option><option>EXP</option><option>PWR</option><option>1-V</option></select></label><button id="stats-button" type="button">Compute statistics</button><output id="stats-result"></output></details><details class="extra-panel"><summary>Bond worksheet</summary><div class="extra-grid"><label>Settlement<input id="bond-settle" type="date" value="2004-06-12"></label><label>Redemption<input id="bond-redeem" type="date" value="2005-12-31"></label><label>Coupon %<input id="bond-coupon" type="number" step="any" value="7"></label><label>Redemption / $100<input id="bond-rv" type="number" step="any" value="100"></label><label>Coupons/year<select id="bond-freq"><option>2</option><option>1</option></select></label><label>Day count<select id="bond-method"><option value="360">30/360</option><option value="ACT">Actual</option></select></label><label>Yield %<input id="bond-yield" type="number" step="any" value="8"></label><label>Clean price<input id="bond-clean" type="number" step="any" value="98.56"></label><button id="bond-price-button" type="button">Price</button><button id="bond-yield-button" type="button">Yield</button></div><output id="bond-output"></output></details><div class="work-menu" id="scientific-menu" aria-label="Scientific functions"><button type="button" data-sci="exp">eˣ</button><button type="button" data-sci="factorial">x!</button><button type="button" data-sci="pi">π</button><button type="button" data-sci="ans">ANS</button><button type="button" data-sci="sin">sin</button><button type="button" data-sci="cos">cos</button><button type="button" data-sci="tan">tan</button><button type="button" data-sci="angle">DEG/RAD</button><button type="button" data-sci="percent">%</button><button type="button" data-calc="ncr">nCr</button><button type="button" data-calc="npr">nPr</button><button type="button" data-calc="constant">CONST</button></div><details class="extra-panel" id="format-panel"><summary>Display format</summary><div class="extra-grid"><label>Decimal places<select id="decimal-setting"><option value="0">0</option><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="F">Floating</option></select></label><label>Number separators<select id="separator-setting"><option value="US">US: 1,234.56</option><option value="EUR">European: 1.234,56</option></select></label></div><small>Display only. Calculations retain their unrounded values.</small></details><p class="caption">TVM: type or calculate, then tap N, I/Y, PV, PMT or FV to store the display; CPT + key solves; RCL + key recalls. Arithmetic defaults to chain order; parentheses group expressions. CONST: enter number, operator, constant, tap CONST and =; type another number and = to reuse it. 2ND + 2 opens display format. In a worksheet, arrows navigate, ENTER stores, CPT computes, 2ND + CE/C clears, and 2ND + CPT quits.</p><p class="disclosure">Depreciation intentionally excluded. Financial worksheets, TVM, bond, date, statistics, arithmetic, parentheses, constant, selected scientific functions, and US/European display formats are implemented. Not a key-for-key emulator; some functions use panels. Offline single HTML file, not a browser-installable PWA.</p></main><script>
+'use strict';
+(()=>{
+const STORAGE='financial-calculator-pro-v1';
+const defaults=()=>({tvm:{N:0,IY:0,PV:0,PMT:0,FV:0},py:1,cy:1,timing:'END'});
+let state=defaults();try{const saved=JSON.parse(localStorage.getItem(STORAGE));if(saved&&saved.tvm&&['N','IY','PV','PMT','FV'].every(k=>Number.isFinite(saved.tvm[k]))&&Number.isInteger(saved.py)&&saved.py>0&&Number.isInteger(saved.cy)&&saved.cy>0&&['END','BGN'].includes(saved.timing))state={tvm:saved.tvm,py:saved.py,cy:saved.cy,timing:saved.timing}}catch(_){}
+let resetArmed=false,decimals=2,numberLocale='US',frames=[],operandReady=false,constant=null,angleUnit='DEG',inverse=false,hyperbolic=false,ceStage=0,lastAnswer=0,entry='',display=0,mode='',pending=null,operand=null,fresh=false,justSolved=false,settingsMode='',worksheet='',amort={P1:1,P2:1},amortIndex=0,cf={initial:0,flows:[],rate:0,ri:0},cfIndex=0,analysisIndex=0,workIndex=0,statsPoints=[],statsModel='LIN',registers=Array(10).fill(0),workValues={PCT:{OLD:0,NEW:0,CH:0,PD:1},CONV:{NOM:0,EFF:0,CY:1},MARGIN:{CST:0,SEL:0,MAR:0},BREAK:{FC:0,VC:0,P:0,PFT:0,Q:0}},message='Enter a value, then tap a TVM key to store it.';
+try{const savedCF=JSON.parse(localStorage.getItem('financial-calculator-pro-cf-v1'));if(savedCF&&Number.isFinite(savedCF.initial)&&Number.isFinite(savedCF.rate)&&Number.isFinite(savedCF.ri)&&Array.isArray(savedCF.flows)&&savedCF.flows.length<=32&&savedCF.flows.every(x=>Number.isFinite(x.amount)&&Number.isInteger(x.freq)&&x.freq>=1&&x.freq<=9999))cf=savedCF}catch(_){}
+try{const saved=JSON.parse(localStorage.getItem('financial-calculator-pro-extra-v1'));if(saved&&Array.isArray(saved.registers)&&saved.registers.length===10&&saved.registers.every(Number.isFinite))registers=saved.registers;if(saved&&Array.isArray(saved.statsPoints)&&saved.statsPoints.length<=50&&saved.statsPoints.every(p=>Number.isFinite(p.x)&&Number.isFinite(p.y)))statsPoints=saved.statsPoints;if(saved&&['LIN','LN','EXP','PWR','1-V'].includes(saved.statsModel))statsModel=saved.statsModel;if(saved&&saved.workValues)for(const name of Object.keys(workValues)){const obj=saved.workValues[name];if(obj&&Object.keys(workValues[name]).every(k=>Number.isFinite(obj[k])))workValues[name]=obj}}catch(_){}
+function persistExtra(){try{localStorage.setItem('financial-calculator-pro-extra-v1',JSON.stringify({registers,workValues,statsPoints,statsModel}))}catch(_){}}
+try{const f=JSON.parse(localStorage.getItem('financial-calculator-pro-format-v1'));if(f&&([0,1,2,3,4,5,6,7,8,'F'].includes(f.decimals))&&['US','EUR'].includes(f.numberLocale)){decimals=f.decimals;numberLocale=f.numberLocale}}catch(_){}
+function persistFormat(){try{localStorage.setItem('financial-calculator-pro-format-v1',JSON.stringify({decimals,numberLocale}))}catch(_){}}
+const $=id=>document.getElementById(id);const label={N:'N',IY:'I/Y',PV:'PV',PMT:'PMT',FV:'FV'};
+function persist(){try{localStorage.setItem(STORAGE,JSON.stringify(state))}catch(_){}}
+function fmt(v,max=decimals){if(!Number.isFinite(v))return 'Error';if(v!==0&&(Math.abs(v)>=1e12||Math.abs(v)<1e-9))return v.toExponential(5);
+ const opt=max==='F'?{maximumSignificantDigits:10}:{minimumFractionDigits:max,maximumFractionDigits:max};
+ return new Intl.NumberFormat(numberLocale==='EUR'?'de-DE':'en-US',opt).format(v)}
+function stored(v,k){if(!Number.isFinite(v))return 'Error';return new Intl.NumberFormat(numberLocale==='EUR'?'de-DE':'en-US',{maximumFractionDigits:decimals==='F'?8:Math.max(decimals,k==='N'?4:2)}).format(v)}
+function setFormat(){const d=$('decimal-setting').value,loc=$('separator-setting').value;if(!['F','0','1','2','3','4','5','6','7','8'].includes(d)||!['US','EUR'].includes(loc))return;decimals=d==='F'?'F':Number(d);numberLocale=loc;persistFormat();message='Display: '+(decimals==='F'?'floating':decimals+' decimals')+', '+loc+' separators. Stored values unchanged.';render()}
+
+function render(){
+ for(const k of Object.keys(state.tvm)){const e=document.querySelector('[data-value="'+k+'"]');e.textContent=stored(state.tvm[k],k);e.parentElement.setAttribute('aria-label',label[k]+' stored '+e.textContent);e.parentElement.setAttribute('title',label[k]+' full stored value: '+state.tvm[k])}
+ $('digits').textContent=entry!==''?entry:fmt(display);$('mode').textContent=mode==='2ND'?'2ND':mode==='CPT'?'CPT':mode==='RCL'?'RCL':worksheet==='AMORT'?('AMORT '+['P1','P2','BAL','PRN','INT'][amortIndex]):worksheet==='CF'?('CF '+cfField()):worksheet==='NPV'?('NPV '+['I','NPV','NFV','PB','DPB'][analysisIndex]):worksheet==='IRR'?('IRR '+['IRR','RI','MOD'][analysisIndex]):workValues[worksheet]?worksheet+' '+workFields()[workIndex]:worksheet==='MEM'?'MEM M'+workIndex:settingsMode?'SET '+settingsMode:pending?'OP':'READY';$('hint').textContent=message;
+ $('periods').textContent=`P/Y ${state.py} · C/Y ${state.cy} · ${state.timing}`;
+ document.querySelectorAll('[data-act="cpt"],[data-act="rcl"],[data-act="second"]').forEach(e=>e.classList.toggle('selected',e.dataset.act.toUpperCase()===mode));
+}
+function fail(text){mode='';entry='';pending=null;operand=null;frames=[];operandReady=false;constant=null;display=0;fresh=false;message=text;render()}
+function value(){return entry!==''?Number(entry):display}
+function input(d){ceStage=0;if(mode)mode='';if(fresh){entry='';fresh=false}operandReady=true;if(d==='.'&&entry.includes('.'))return;if(entry.replace(/[^0-9]/g,'').length>=13)return;if(entry===''&&d==='.')entry='0.';else if(entry==='0'&&d!=='.')entry=d;else if(entry==='-0'&&d!=='.')entry='-'+d;else entry+=d;message=worksheet?'Press ENTER to store this worksheet value.':'Tap a TVM key to store, or CPT then a TVM key to solve.';render()}
+function rateFromAnnual(annual){const base=1+annual/(100*state.cy);if(base<=0)throw Error('Rate is outside the supported compounding range.');return Math.pow(base,state.cy/state.py)-1}
+function annualFromRate(r){return (Math.pow(1+r,state.py/state.cy)-1)*100*state.cy}
+function factor(n,r){return Math.abs(r)<1e-12?n:Math.expm1(n*Math.log1p(r))/r}
+function equation(n,r,pv,pmt,fv){const growth=Math.pow(1+r,n),due=state.timing==='BGN'?1+r:1;return pv*growth+pmt*due*factor(n,r)+fv}
+function solve(k){const {N,PV,PMT,FV,IY}=state.tvm;let r;if(k!=='IY')r=rateFromAnnual(IY);const due=state.timing==='BGN'?1+r:1;let result;
+if(k==='FV')result=-(PV*Math.pow(1+r,N)+PMT*due*factor(N,r));
+else if(k==='PV')result=-(FV+PMT*due*factor(N,r))/Math.pow(1+r,N);
+else if(k==='PMT'){const denom=due*factor(N,r);if(Math.abs(denom)<1e-13)throw Error('Cannot solve PMT when N is zero.');result=-(FV+PV*Math.pow(1+r,N))/denom}
+else if(k==='N'){if(Math.abs(r)<1e-12){if(PMT===0)throw Error('Cannot solve N with zero payment and zero rate.');result=-(PV+FV)/PMT}else{const a=PMT*due/r,ratio=(a-FV)/(a+PV);if(!(ratio>0))throw Error('No real N for these inputs.');result=Math.log(ratio)/Math.log1p(r)}if(result<0)throw Error('No nonnegative N for these inputs.')}
+else if(k==='IY'){
+if(N<=0)throw Error('Set N above zero before solving I/Y.');
+// Scan logarithmically across periodic rates, then bisect the first sign-changing interval.
+const f=x=>equation(N,x,PV,PMT,FV), roots=[];
+// Scan the valid periodic-rate domain and retain every sign-changing root.
+const points=[-.999999999,0];for(let j=1;j<=1600;j++)points.push(-.999999999+Math.expm1(j/1600*Math.log(1+1000.999999999)));
+points.sort((a,b)=>a-b);let previous=points[0],fp=f(previous);
+for(let j=1;j<points.length;j++){const x=points[j],fx=f(x);
+ if(Number.isFinite(fx)&&Math.abs(fx)<1e-8)roots.push(x);
+ if(Number.isFinite(fx)&&Number.isFinite(fp)&&((fp<0&&fx>0)||(fp>0&&fx<0))){let lo=previous,hi=x,fl=fp;
+ for(let t=0;t<130;t++){const mid=(lo+hi)/2,fm=f(mid);if((fl<0&&fm<=0)||(fl>0&&fm>=0)){lo=mid;fl=fm}else hi=mid}
+ roots.push((lo+hi)/2)}previous=x;fp=fx}
+if(!roots.length)throw Error('No interest-rate solution found for these inputs.');
+// Prefer a nonnegative rate when one exists; otherwise use the negative root nearest zero.
+const positives=roots.filter(x=>x>=0),candidates=positives.length?positives:roots;
+candidates.sort((a,b)=>Math.abs(annualFromRate(a)-IY)-Math.abs(annualFromRate(b)-IY));
+result=annualFromRate(candidates[0]);
+}if(!Number.isFinite(result))throw Error('No finite solution for these inputs.');return result}
+function tvm(k){
+ if(mode==='CPT'){mode='';try{const out=solve(k);state.tvm[k]=out;display=out;entry='';fresh=true;justSolved=true;persist();message='Computed '+label[k]+'; stored value updated.'}catch(e){fail(e.message);return}}
+ else if(mode==='RCL'){mode='';display=state.tvm[k];entry='';fresh=true;justSolved=false;message='Recalled '+label[k]+' (stored value unchanged).'}
+ else {const v=value();if(!Number.isFinite(v)){fail('Invalid entry.');return}state.tvm[k]=v;display=v;entry='';fresh=true;justSolved=false;persist();message='Stored displayed value in '+label[k]+'.'}
+ render()
+}
+
+function persistCF(){try{localStorage.setItem('financial-calculator-pro-cf-v1',JSON.stringify(cf))}catch(_){}}
+function cfField(){if(cfIndex===0)return 'CFo';const n=Math.ceil(cfIndex/2);return (cfIndex%2?'C':'F')+String(n).padStart(2,'0')}
+function cfValue(){if(cfIndex===0)return cf.initial;const n=Math.ceil(cfIndex/2)-1;return cf.flows[n]?.[cfIndex%2?'amount':'freq']??(cfIndex%2?0:1)}
+function showCF(){display=cfValue();entry='';fresh=true;message=cfField()+' = '+fmt(display)+' · ENTER stores; arrows navigate.';render()}
+function cfSeries(){const series=[cf.initial];for(const x of cf.flows)for(let i=0;i<x.freq;i++)series.push(x.amount);return series}
+function cfNPV(series,rate){if(!(rate>-1))throw Error('Rate must be greater than -100%.');let sum=series[0],discount=1;for(let i=1;i<series.length;i++){discount*=1+rate;sum+=series[i]/discount}return sum}
+function cfNPVGrouped(rate){if(!(rate>-1))throw Error('Rate must be greater than -100%.');let sum=cf.initial,t=0;const q=1/(1+rate);for(const x of cf.flows){if(rate===0)sum+=x.amount*x.freq;else{const first=Math.pow(q,t+1);const block=-Math.expm1(x.freq*Math.log(q))/(1-q);sum+=x.amount*first*block}t+=x.freq}return sum}
+function cfPayback(series,rate){let sum=series[0];if(sum>=0)return 0;for(let t=1;t<series.length;t++){const part=series[t]/Math.pow(1+rate,t),next=sum+part;if(next>=0&&part>0)return t-1+(-sum)/part;sum=next}throw Error('Cash flows do not recover the initial investment.')}
+function cfIRR(series){if(series.length<2||!series.some(x=>x>0)||!series.some(x=>x<0))throw Error('IRR requires positive and negative cash flows.');
+ // Scan log(1+r), then bisect sign changes. Multiple roots: nearest to zero.
+ const roots=[];let prev=Math.expm1(-18),last=cfNPVGrouped(prev);
+ for(let i=1;i<=1600;i++){const x=Math.expm1(-18+i*24/1600),y=cfNPVGrouped(x);if(Number.isFinite(y)&&Math.abs(y)<1e-9)roots.push(x);
+ if(Number.isFinite(y)&&Number.isFinite(last)&&((y>0&&last<0)||(y<0&&last>0))){let lo=prev,hi=x,fl=last;for(let j=0;j<90;j++){const mid=(lo+hi)/2,fm=cfNPVGrouped(mid);if((fl<0&&fm<=0)||(fl>0&&fm>=0)){lo=mid;fl=fm}else hi=mid}roots.push((lo+hi)/2)}prev=x;last=y}
+ if(!roots.length)throw Error('No IRR root found in supported range.');roots.sort((a,b)=>Math.abs(a)-Math.abs(b));return roots[0]*100}
+function cfMOD(series,financeRate,reinvestRate){if(financeRate<=-1||reinvestRate<=-1)throw Error('Rates must be greater than -100%.');const n=series.length-1;if(n<1)throw Error('Enter at least one future cash flow.');let pvNeg=0,fvPos=0;for(let t=0;t<=n;t++){if(series[t]<0)pvNeg+=series[t]/Math.pow(1+financeRate,t);else fvPos+=series[t]*Math.pow(1+reinvestRate,n-t)}if(!(pvNeg<0&&fvPos>0))throw Error('MOD requires positive and negative cash flows.');return (Math.pow(fvPos/-pvNeg,1/n)-1)*100}
+function cfResult(field){const r=cf.rate/100;if(!cf.flows.length)throw Error('Enter at least one cash flow after CFo.');if(field==='NPV')return cfNPVGrouped(r);if(field==='NFV')return cfNPVGrouped(r)*Math.pow(1+r,cf.flows.reduce((n,x)=>n+x.freq,0));const series=cfSeries();if(field==='PB')return cfPayback(series,0);if(field==='DPB')return cfPayback(series,r);if(field==='IRR')return cfIRR(series);if(field==='MOD')return cfMOD(series,r,cf.ri/100);throw Error('Unknown field.')}
+function showAnalysis(){const field=worksheet==='NPV'?['I','NPV','NFV','PB','DPB'][analysisIndex]:['IRR','RI','MOD'][analysisIndex];try{display=field==='I'?cf.rate:field==='RI'?cf.ri:cfResult(field);entry='';fresh=true;message=field+' = '+fmt(display)+' · arrows navigate; ENTER stores I or RI.'}catch(e){display=0;entry='';fresh=true;message=e.message}render()}
+
+
+const WORK_FIELDS={PCT:['OLD','NEW','CH','PD'],CONV:['NOM','EFF','CY'],MARGIN:['CST','SEL','MAR'],BREAK:['FC','VC','P','PFT','Q']};
+function workFields(){return WORK_FIELDS[worksheet]||[]}
+function showWork(){const key=workFields()[workIndex];display=workValues[worksheet][key];entry='';fresh=true;message=key+' = '+fmt(display)+' · ENTER stores; CPT solves; arrows navigate.';render()}
+function solveWork(name,key){const v=workValues[name],bad=()=>{throw Error('Cannot solve with these inputs; check zero denominators and signs.')};let out;
+ if(name==='PCT'){const p=v.PD;if(key==='NEW')out=v.OLD*Math.pow(1+v.CH/100,p);
+ else if(key==='OLD')out=v.NEW/Math.pow(1+v.CH/100,p);
+ else if(key==='CH')out=(Math.pow(v.NEW/v.OLD,1/p)-1)*100;
+ else if(key==='PD')out=Math.log(v.NEW/v.OLD)/Math.log1p(v.CH/100)}
+ if(name==='CONV'){const c=v.CY;if(!(Number.isInteger(c)&&c>0))bad();if(key==='EFF')out=(Math.pow(1+v.NOM/(100*c),c)-1)*100;else if(key==='NOM')out=c*(Math.pow(1+v.EFF/100,1/c)-1)*100;else bad()}
+ if(name==='MARGIN'){if(key==='MAR')out=(v.SEL-v.CST)/v.SEL*100;else if(key==='CST')out=v.SEL*(1-v.MAR/100);else if(key==='SEL')out=v.CST/(1-v.MAR/100)}
+ if(name==='BREAK'){if(key==='PFT')out=v.Q*(v.P-v.VC)-v.FC;else if(key==='Q')out=(v.FC+v.PFT)/(v.P-v.VC);else if(key==='FC')out=v.Q*(v.P-v.VC)-v.PFT;else if(key==='P')out=(v.PFT+v.FC)/v.Q+v.VC;else if(key==='VC')out=v.P-(v.PFT+v.FC)/v.Q}
+ if(!Number.isFinite(out))bad();return out}
+
+
+function dayUTC(s){const d=new Date(s+'T00:00:00Z');if(!/^\d{4}-\d{2}-\d{2}$/.test(s)||!Number.isFinite(d.getTime())||d.toISOString().slice(0,10)!==s)throw Error('Enter valid calendar dates.');return d}
+function dayCount360(a,b){let y=b.getUTCFullYear()-a.getUTCFullYear(),m=b.getUTCMonth()-a.getUTCMonth();let d1=Math.min(30,a.getUTCDate()),d2=b.getUTCDate();if(d1===30&&d2===31)d2=30;return 360*y+30*m+d2-d1}
+function dateAction(a){try{const start=dayUTC($('date-start').value),end=dayUTC($('date-end').value),method=$('date-method').value;
+ if(a==='days'){const n=method==='360'?dayCount360(start,end):(end-start)/86400000;$('date-result').textContent='Days between dates: '+n;display=n;entry='';fresh=true;message='Date difference ('+method+').'}
+ else{if(method==='360')throw Error('Date addition uses actual calendar days.');const n=Number($('date-days').value);if(!Number.isInteger(n)||Math.abs(n)>100000)throw Error('Enter a whole number of days.');const d=new Date(start.getTime()+n*86400000);$('date-result').textContent='Computed date: '+d.toISOString().slice(0,10)+' ('+d.toLocaleDateString('en-US',{weekday:'short',timeZone:'UTC'})+')';display=n;message='Date computed.'}render()
+ }catch(e){$('date-result').textContent=e.message}}
+function statsResults(points,model){if(!points.length)throw Error('Enter at least one X,Y pair.');if(points.length>50)throw Error('Maximum 50 data pairs.');const n=points.length,sx=points.reduce((s,p)=>s+p.x,0),sy=points.reduce((s,p)=>s+p.y,0),mx=sx/n,my=sy/n;const vx=points.reduce((s,p)=>s+(p.x-mx)**2,0),vy=points.reduce((s,p)=>s+(p.y-my)**2,0);
+ const result={n,meanX:mx,meanY:my,sampleX:n>1?Math.sqrt(vx/(n-1)):NaN,popX:Math.sqrt(vx/n),sampleY:n>1?Math.sqrt(vy/(n-1)):NaN,popY:Math.sqrt(vy/n),sumX:sx,sumY:sy,sumX2:points.reduce((s,p)=>s+p.x*p.x,0),sumY2:points.reduce((s,p)=>s+p.y*p.y,0),sumXY:points.reduce((s,p)=>s+p.x*p.y,0)};
+ if(model==='1-V')return result;
+ const transformed=points.map(p=>({x:model==='LN'||model==='PWR'?Math.log(p.x):p.x,y:model==='EXP'||model==='PWR'?Math.log(p.y):p.y}));if(transformed.some(p=>!Number.isFinite(p.x)||!Number.isFinite(p.y)))throw Error('Log/EXP/PWR models require positive inputs where logarithms are used.');
+ const ax=transformed.reduce((s,p)=>s+p.x,0)/n,ay=transformed.reduce((s,p)=>s+p.y,0)/n,xx=transformed.reduce((s,p)=>s+(p.x-ax)**2,0),yy=transformed.reduce((s,p)=>s+(p.y-ay)**2,0),xy=transformed.reduce((s,p)=>s+(p.x-ax)*(p.y-ay),0);
+ if(xx===0||yy===0)throw Error('Regression requires variation in both variables.');const slope=xy/xx,intercept=ay-slope*ax;
+ return {...result,a:model==='EXP'||model==='PWR'?Math.exp(intercept):intercept,b:slope,r:xy/Math.sqrt(xx*yy)}
+}
+function statsAction(){try{const rows=$('stats-input').value.trim().split(/\n/).filter(Boolean);const points=rows.map(row=>{const m=row.trim().split(/[,;\s]+/).map(Number);if(m.length!==2||!m.every(Number.isFinite))throw Error('Enter one X,Y pair per line.');return {x:m[0],y:m[1]}});const model=$('stats-model').value,res=statsResults(points,model);statsPoints=points;statsModel=model;persistExtra();$('stats-result').textContent=Object.entries(res).map(([k,v])=>k+': '+(Number.isFinite(v)?v.toFixed(6):'n/a')).join('  |  ');display=res.meanX;entry='';message='Statistics computed ('+model+').';render()}catch(e){$('stats-result').textContent=e.message}}
+
+
+function monthShift(date,offset){const d=new Date(Date.UTC(date.getUTCFullYear(),date.getUTCMonth()+offset,1));const last=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+1,0)).getUTCDate();d.setUTCDate(Math.min(date.getUTCDate(),last));return d}
+function bondMetrics(settle,redeem,coupon,rv,yieldPct,freq,method){
+ if(!(redeem>settle)||![coupon,rv,yieldPct].every(Number.isFinite)||coupon<0||rv<0||![1,2].includes(freq)||yieldPct<=-100*freq)throw Error('Invalid bond inputs.');
+ const dates=[];let previous=redeem;while(previous>settle&&dates.length<300){dates.unshift(previous);previous=monthShift(previous,-12/freq)}if(!dates.length||dates.length>=300)throw Error('Bond term outside supported range.');
+ const days=(a,b)=>method==='360'?dayCount360(a,b):(b-a)/86400000;
+ const e=days(previous,dates[0]),a=days(previous,settle);if(!(e>0&&a>=0&&a<=e))throw Error('Unsupported coupon dates.');
+ const w=(e-a)/e,q=1+yieldPct/(100*freq),c=coupon/freq,AI=c*a/e;
+ let dirty=0,weighted=0;for(let i=0;i<dates.length;i++){const t=w+i,pv=(c+(i===dates.length-1?rv:0))/Math.pow(q,t);dirty+=pv;weighted+=t*pv}
+ return {PRI:dirty-AI,AI,DUR:weighted/(dirty-AI)/freq/q}
+}
+function bondAction(which){try{const settle=dayUTC($('bond-settle').value),redeem=dayUTC($('bond-redeem').value),coupon=Number($('bond-coupon').value),rv=Number($('bond-rv').value),freq=Number($('bond-freq').value),method=$('bond-method').value;let y=Number($('bond-yield').value);
+ if(which==='yield'){const target=Number($('bond-clean').value);if(!(target>0))throw Error('Enter a positive clean price.');let lo=-99*freq,hi=10000;for(let j=0;j<140;j++){const mid=(lo+hi)/2,p=bondMetrics(settle,redeem,coupon,rv,mid,freq,method).PRI;if(p>target)lo=mid;else hi=mid}y=(lo+hi)/2;$('bond-yield').value=y.toFixed(8)}
+ const result=bondMetrics(settle,redeem,coupon,rv,y,freq,method);$('bond-output').textContent='PRI '+fmt(result.PRI)+' | AI '+fmt(result.AI)+' | DUR '+fmt(result.DUR)+' | YLD '+fmt(y)+'%';display=which==='yield'?y:result.PRI;entry='';fresh=true;message='Bond result per $100 par.';render()
+ }catch(e){$('bond-output').textContent=e.message}}
+function money(x){return Math.round((x+Math.sign(x)*Number.EPSILON)*100)/100}
+function amortResults(){
+ const {P1,P2}=amort;if(!Number.isInteger(P1)||!Number.isInteger(P2)||P1<1||P2<P1||P2>10000)throw Error('Set P1 and P2 to valid payment numbers (1–10,000), with P2 >= P1.');
+ const r=rateFromAnnual(state.tvm.IY),pay=money(state.tvm.PMT);let bal=money(state.tvm.PV),principal=0,interest=0;
+ for(let n=1;n<=P2;n++){const int=money(state.timing==='BGN'&&n===1?0:bal*r),pr=money(pay+int);bal=money(bal+pr);if(n>=P1){principal=money(principal+pr);interest=money(interest-int)}}
+ return {BAL:bal,PRN:principal,INT:interest}
+}
+function showAmort(){const field=['P1','P2','BAL','PRN','INT'][amortIndex];try{display=amortIndex<2?amort[field]:amortResults()[field];entry='';fresh=true;message=field+' = '+fmt(display)+' · arrows navigate; ENTER stores P1/P2.'}catch(e){display=0;entry='';message=e.message}render()}
+function binary(a,b,op){return op==='+'?a+b:op==='-'?a-b:op==='*'?a*b:op==='^'?Math.pow(a,b):op==='ncr'?combination(a,b,false):op==='npr'?combination(a,b,true):a/b}
+function op(o){mode='';ceStage=0;constant=null;
+ const has=entry!==''||operandReady;
+ if(pending!==null&&operand!==null&&has){const z=binary(operand,value(),pending);if(!Number.isFinite(z)){fail('Invalid arithmetic result.');return}operand=z;display=z}
+ else if(pending===null)operand=value();
+ pending=o;entry='';operandReady=false;fresh=false;message='Enter the next number, then press =.';render()
+}
+function leftParen(){if(frames.length>=15){message='Maximum 15 nested parentheses.';render();return}frames.push({operand,pending});operand=null;pending=null;entry='';display=0;operandReady=false;fresh=false;message='Parenthesis opened.';render()}
+function rightParen(){if(!frames.length){message='No open parenthesis.';render();return}try{let v=value();if(pending!==null&&operand!==null&&(entry!==''||operandReady))v=binary(operand,v,pending);if(!Number.isFinite(v))throw Error('Invalid arithmetic result.');const parent=frames.pop();operand=parent.operand;pending=parent.pending;display=v;entry=String(v);operandReady=true;fresh=false;message='Parenthesis closed.';render()}catch(e){fail(e.message)}}
+function finishArithmetic(){try{while(frames.length)rightParen();let z=value();if(pending!==null&&operand!==null&&(entry!==''||operandReady))z=binary(operand,z,pending);
+ else if(constant&&pending===null)z=binary(z,constant.value,constant.op);
+ if(!Number.isFinite(z))throw Error('Invalid arithmetic result.');display=z;lastAnswer=z;entry='';pending=null;operand=null;operandReady=true;fresh=true;ceStage=0;message='Result.';render()}catch(e){fail(e.message)}}
+
+function scientific(a){
+ const v=value(),rad=angleUnit==='DEG'?v*Math.PI/180:v;let out;
+ if(a==='inv'){inverse=!inverse;message='Inverse '+(inverse?'on':'off');render();return}
+ if(a==='hyp'){hyperbolic=!hyperbolic;message='Hyperbolic '+(hyperbolic?'on':'off');render();return}
+ if(a==='angle'){angleUnit=angleUnit==='DEG'?'RAD':'DEG';message='Angle unit: '+angleUnit;render();return}
+ if(a==='ans'){out=lastAnswer}
+ else if(a==='percent'){out=(pending==='+'||pending==='-')&&operand!==null?operand*v/100:v/100}
+ else if(a==='pi')out=Math.PI;
+ else if(a==='exp')out=Math.exp(v);
+ else if(a==='factorial'){if(!Number.isInteger(v)||v<0||v>69)throw Error('Factorial requires an integer from 0 to 69.');out=1;for(let n=2;n<=v;n++)out*=n}
+ else if(a==='round')out=Number(v.toFixed(decimals==='F'?8:decimals));
+ else if(a==='random')out=Math.random();
+ else if(['sin','cos','tan'].includes(a)){
+  const f=hyperbolic?Math[a+'h']:Math[a],g=hyperbolic?Math['a'+a+'h']:Math['a'+a];
+  out=inverse?g(v):f(hyperbolic?v:rad);
+  if(inverse&&!hyperbolic&&angleUnit==='DEG')out=out*180/Math.PI;
+  inverse=false;hyperbolic=false;
+ }else throw Error('Unsupported function.');
+ if(!Number.isFinite(out))throw Error('Function is undefined for this input.');
+ display=out;entry='';operandReady=true;fresh=true;lastAnswer=out;message=a+' result';render()
+}
+function combination(n,r,perm){if(!Number.isInteger(n)||!Number.isInteger(r)||n<0||r<0||r>n||n>69)throw Error('n and r must be integers with 0 <= r <= n <= 69.');let out=1;for(let k=1;k<=r;k++)out*=perm?(n-k+1):(n-k+1)/k;return out}
+function action(a){
+ if(resetArmed){if(a==='enter'||a==='equals'){state=defaults();cf={initial:0,flows:[],rate:0,ri:0};registers=Array(10).fill(0);statsPoints=[];workValues={PCT:{OLD:0,NEW:0,CH:0,PD:1},CONV:{NOM:0,EFF:0,CY:1},MARGIN:{CST:0,SEL:0,MAR:0},BREAK:{FC:0,VC:0,P:0,PFT:0,Q:0}};decimals=2;numberLocale='US';$('decimal-setting').value='2';$('separator-setting').value='US';persist();persistCF();persistExtra();persistFormat();entry='';display=0;pending=null;operand=null;frames=[];worksheet='';constant=null;message='Calculator reset.'}else message='Reset canceled.';resetArmed=false;render();return}
+ if(a==='lparen'){leftParen();return}
+ if(a==='rparen'){rightParen();return}
+ if(a==='constant'){if(pending===null||entry===''){message='Enter a number, operator, and constant first.';render();return}constant={op:pending,value:value()};message='Constant stored: '+pending+' '+fmt(constant.value)+'. Press =, then enter a new value and press =.';render();return}
+ if(a==='ncr'||a==='npr'){op(a);message='Enter r, then press =.';render();return}
+ if(a.startsWith('sci:')){try{scientific(a.slice(4))}catch(e){message=e.message;render()}return}
+ if(a.startsWith('work:')){const name=a.slice(5);if(!WORK_FIELDS[name])return;worksheet=name;settingsMode='';mode='';workIndex=0;showWork();return}
+ if(a==='right'){if(worksheet){action('down')}else{message='Use → within a worksheet.';render()}return}
+ if(a==='memory'){worksheet='MEM';settingsMode='';mode='';workIndex=0;display=registers[0];entry='';message='Memory M0 · arrows navigate, ENTER stores.';render();return}
+ if(worksheet==='MEM'&&(a==='up'||a==='down')){workIndex=(workIndex+(a==='down'?1:9))%10;display=registers[workIndex];entry='';message='Memory M'+workIndex+' = '+fmt(display);render();return}
+ if(worksheet==='MEM'&&a==='enter'){if(entry===''){message='Type a value to store in M'+workIndex+'.';render();return}registers[workIndex]=Number(entry);persistExtra();display=registers[workIndex];entry='';fresh=true;message='Stored M'+workIndex+'.';render();return}
+ if(workValues[worksheet]&&(a==='up'||a==='down')){workIndex=(workIndex+(a==='down'?1:workFields().length-1))%workFields().length;showWork();return}
+ if(workValues[worksheet]&&a==='enter'){const key=workFields()[workIndex],v=value();if(entry===''){message='Type a value, then ENTER.';render();return}if(worksheet==='CONV'&&key==='CY'&&(!Number.isInteger(v)||v<1||v>999)){message='C/Y must be a whole number from 1 to 999.';render();return}if(worksheet==='PCT'&&key==='PD'&&(!Number.isFinite(v)||v<=0)){message='Number of periods must be positive.';render();return}workValues[worksheet][key]=v;persistExtra();display=v;entry='';fresh=true;message='Stored '+key+' = '+fmt(v);render();return}
+ if(workValues[worksheet]&&a==='cpt'){const key=workFields()[workIndex];try{const out=solveWork(worksheet,key);workValues[worksheet][key]=out;persistExtra();display=out;entry='';fresh=true;message='Computed '+key+' = '+fmt(out)}catch(e){message=e.message}render();return}
+ if(a==='cf'){worksheet='CF';mode='';settingsMode='';cfIndex=0;showCF();return}
+ if(a==='npv'){worksheet='NPV';mode='';settingsMode='';analysisIndex=0;showAnalysis();return}
+ if(a==='irr'){worksheet='IRR';mode='';settingsMode='';analysisIndex=0;showAnalysis();return}
+ if(worksheet==='CF'&&(a==='up'||a==='down')){cfIndex=Math.max(0,Math.min(64,cfIndex+(a==='down'?1:-1)));showCF();return}
+ if((worksheet==='NPV'||worksheet==='IRR')&&(a==='up'||a==='down')){const len=worksheet==='NPV'?5:3;analysisIndex=(analysisIndex+(a==='down'?1:len-1))%len;showAnalysis();return}
+ if(worksheet==='CF'&&a==='enter'){
+  if(entry===''){message='Type a cash flow or frequency, then ENTER.';render();return}
+  const v=Number(entry),n=Math.ceil(cfIndex/2)-1;
+  if(cfIndex>0&&n>=32){message='Professional model supports up to 32 subsequent cash-flow entries.';render();return}
+  if(cfIndex%2===0&&cfIndex>0&&(!Number.isInteger(v)||v<1||v>9999)){message='Frequency must be a whole number from 1 to 9999.';render();return}
+  if(!Number.isFinite(v)){message='Enter a finite value.';render();return}
+  if(cfIndex===0)cf.initial=v;else{while(cf.flows.length<=n)cf.flows.push({amount:0,freq:1});cf.flows[n][cfIndex%2?'amount':'freq']=v}
+  persistCF();display=v;entry='';fresh=true;message='Stored '+cfField()+' = '+fmt(v)+'.';render();return
+ }
+ if((worksheet==='NPV'||worksheet==='IRR')&&a==='enter'){
+  const field=worksheet==='NPV'?['I','NPV','NFV','PB','DPB'][analysisIndex]:['IRR','RI','MOD'][analysisIndex];
+  if(field!=='I'&&field!=='RI'){message=field+' is computed, not entered.';render();return}
+  if(entry===''){message='Type a rate, then ENTER.';render();return}
+  const v=Number(entry);if(!Number.isFinite(v)||v<=-100){message='Rate must exceed -100%.';render();return}
+  cf[field==='I'?'rate':'ri']=v;persistCF();display=v;entry='';fresh=true;message='Stored '+field+' = '+fmt(v)+'.';render();return
+ }
+ if((worksheet==='NPV'||worksheet==='IRR')&&a==='cpt'){
+  const field=worksheet==='NPV'?['I','NPV','NFV','PB','DPB'][analysisIndex]:['IRR','RI','MOD'][analysisIndex];
+  if(field==='I'||field==='RI'){message='Enter a rate, then move to a computed result.';render();return}
+  showAnalysis();return
+ }
+ if(a==='amort'){worksheet='AMORT';settingsMode='';mode='';amortIndex=0;showAmort();return}
+ if(a==='quit'){worksheet='';settingsMode='';mode='';entry='';display=0;message='Standard calculator mode.';render();return}
+ if(a==='clear-work'&&workValues[worksheet]){const defaults={PCT:{OLD:0,NEW:0,CH:0,PD:1},CONV:{NOM:0,EFF:0,CY:1},MARGIN:{CST:0,SEL:0,MAR:0},BREAK:{FC:0,VC:0,P:0,PFT:0,Q:0}};workValues[worksheet]=defaults[worksheet];persistExtra();workIndex=0;showWork();return}
+ if(a==='clear-work'&&worksheet==='MEM'){registers=Array(10).fill(0);persistExtra();workIndex=0;display=0;entry='';message='Memories cleared.';render();return}
+ if(a==='clear-work'&&worksheet==='AMORT'){amort={P1:1,P2:1};amortIndex=0;showAmort();return}
+ if(a==='clear-work'&&worksheet==='CF'){cf.initial=0;cf.flows=[];persistCF();cfIndex=0;showCF();return}
+ if(a==='clear-work'&&worksheet==='NPV'){cf.rate=0;persistCF();analysisIndex=0;showAnalysis();return}
+ if(a==='clear-work'&&worksheet==='IRR'){cf.ri=0;persistCF();analysisIndex=0;showAnalysis();return}
+ if(worksheet==='CF'&&(a==='delete'||a==='insert')){const n=Math.ceil(cfIndex/2)-1;if(n<0){message='Select a Cnn or Fnn entry first.';render();return}if(a==='insert'&&cf.flows.length>=32){message='Maximum 32 cash-flow entries.';render();return}if(a==='insert'){cf.flows.splice(n,0,{amount:0,freq:1});cfIndex=2*n+1}else if(n<cf.flows.length){cf.flows.splice(n,1);cfIndex=2*n+1}else{message='No entry to delete.';render();return}persistCF();showCF();return}
+
+ if(worksheet==='AMORT'&&(a==='up'||a==='down')){amortIndex=(amortIndex+(a==='down'?1:4))%5;showAmort();return}
+ if(worksheet==='AMORT'&&a==='enter'){
+  if(amortIndex>1){message='BAL, PRN and INT are computed, not entered.';render();return}
+  const v=value();if(!Number.isInteger(v)||v<1||v>10000){message='Enter a whole payment number from 1 to 10,000.';render();return}
+  amort[amortIndex===0?'P1':'P2']=v;display=v;entry='';fresh=true;message='Stored '+(amortIndex===0?'P1':'P2')+' = '+v+'.';render();return
+ }
+ if(worksheet==='AMORT'&&a==='cpt'&&amortIndex<2){const span=amort.P2-amort.P1+1;amort.P1+=span;amort.P2+=span;showAmort();return}
+ if(a==='second'){mode=mode==='2ND'?'':'2ND';message=mode?'Tap a key for its orange function.':'Second function canceled.';render();return}
+ if(a==='cpt'&&(workValues[worksheet]||worksheet==='MEM')){if(worksheet==='MEM'){message='Memories are entered, not computed.';render();return}const key=workFields()[workIndex];try{const out=solveWork(worksheet,key);workValues[worksheet][key]=out;persistExtra();display=out;entry='';fresh=true;message='Computed '+key+' = '+fmt(out)}catch(e){message=e.message}render();return}
+ if(a==='sto'){mode=mode==='STO'?'':'STO';message=mode?'Tap a digit 0–9 to store the display.':'Store canceled.';render();return}
+ if(a==='cpt'||a==='rcl'){mode=mode===a.toUpperCase()?'':a.toUpperCase();if(a==='cpt')entry='';message=mode==='CPT'?'Tap the TVM key to compute.':mode==='RCL'?'Tap the TVM key to recall.':'Selection canceled.';render();return}
+ if(a==='up'||a==='down'){if(settingsMode){settingsMode=settingsMode==='P/Y'?'C/Y':'P/Y';entry='';display=settingsMode==='P/Y'?state.py:state.cy;message='Enter '+settingsMode+', then press ENTER.'}else message='Navigation is available in the P/Y and C/Y settings.';render();return}
+ if(a==='settings'){settingsMode='P/Y';entry='';display=state.py;fresh=true;message='Type P/Y and press ENTER. Use arrows to select C/Y.';render();return}
+ if(a==='enter'&&settingsMode){if(entry!==''){const v=Number(entry);if(!Number.isInteger(v)||v<1||v>999){message='Enter a whole number from 1 to 999.';render();return}if(settingsMode==='P/Y'){state.py=v;state.cy=v}else state.cy=v;persist();display=v;entry='';fresh=true;message=settingsMode+' set to '+v+'. Use arrows to switch setting or CE/C to exit.'}else message='Type a value, then press ENTER.';render();return}
+ if(a==='ce'){
+  if(worksheet||settingsMode){worksheet='';settingsMode='';entry='';display=0;pending=null;operand=null;frames=[];operandReady=false;fresh=false;mode='';message='Returned to standard calculator.';render();return}
+  if(pending!==null&&ceStage===0){entry='';display=0;operandReady=false;fresh=false;mode='';ceStage=1;message='Entry cleared; pending operation retained.';render();return}
+  entry='';display=0;pending=null;operand=null;frames=[];operandReady=false;constant=null;fresh=false;mode='';ceStage=0;message='Calculator cleared.';render();return
+ }
+ mode='';
+ if(a==='clear-tvm'){state.tvm={N:0,IY:0,PV:0,PMT:0,FV:0};persist();entry='';display=0;fresh=true;message='TVM values cleared; P/Y, C/Y and timing retained.'}
+ else if(a==='back'){if(entry!==''){entry=entry.slice(0,-1);if(entry==='-')entry='';message='Last digit removed.'}}
+ else if(a==='sign'){if(entry!=='')entry=entry.startsWith('-')?entry.slice(1):'-'+entry;else{display=-display;entry=String(display);fresh=false}message='Sign changed.'}
+ else if(a==='timing'){state.timing=state.timing==='END'?'BGN':'END';persist();message=state.timing+' payment timing selected.'}
+ else if(a==='xpy'){const z=value()*state.py;if(!Number.isFinite(z)){fail('Invalid result.');return}display=z;entry=String(z);fresh=false;message='Multiplied by P/Y. Tap N to store.'}
+ else if(a==='equals'||a==='enter'){if(pending!==null||frames.length||constant){finishArithmetic();return}else if(entry!==''){display=Number(entry);lastAnswer=display;entry='';operandReady=true;fresh=true;message='Value entered.'}}
+ else if(['sqrt','recip','pct','square','ln'].includes(a)){const v=value(),z=a==='sqrt'?Math.sqrt(v):a==='recip'?1/v:a==='pct'?v/100:a==='square'?v*v:Math.log(v);if(!Number.isFinite(z)){fail('Invalid arithmetic result.');return}display=z;lastAnswer=z;entry='';operandReady=true;fresh=true;ceStage=0;message='Result.'}
+ else if(a==='planned')message='This key has no assigned function in this build.';
+ render()
+}
+function secondKey(b){const k=b.dataset.tvm;
+ if(b.dataset.act==='npv'){mode='';action('amort');return true}
+ if(b.dataset.act==='cf'){mode='';action('xpy');return true}
+ if(b.dataset.act==='irr'||b.dataset.digit==='8'){mode='';$('bond-settle').focus?.();message='Bond worksheet below the keypad.';render();return true}
+ if(b.dataset.act==='right'){mode='';$('date-start').focus?.();message='Date worksheet below the keypad.';render();return true}
+ if(b.dataset.digit==='7'||b.dataset.act==='ln'&&b.textContent.includes('DATA')){mode='';$('stats-input').focus?.();message='Statistics worksheet below the keypad.';render();return true}
+ if(b.dataset.digit==='3'||b.dataset.act==='back'){mode='';resetArmed=true;message='Reset all stored values and settings? Press ENTER to confirm, CE/C to cancel.';render();return true}
+ if(b.dataset.act==='sto'){mode='';action('sci:round');return true}
+ if(b.dataset.act==='lparen'){mode='';action('sci:inv');action('sci:sin');return true}
+ if(b.dataset.act==='rparen'){mode='';action('sci:inv');action('sci:cos');return true}
+ if(b.dataset.op==='^'){mode='';action('sci:inv');action('sci:tan');return true}
+
+ if(b.dataset.act==='square'){mode='';action('sci:factorial');return true}
+ if(b.dataset.act==='ln'&&b.textContent.includes('DATA')){mode='';$('stats-input').focus?.();message='Statistics panel below.';render();return true}
+ if(b.dataset.act==='ln'){mode='';action('sci:sin');return true}
+ if(b.dataset.act==='recip'){mode='';action('sci:cos');return true}
+ if(b.dataset.act==='sqrt'){mode='';action('sci:tan');return true}
+ if(b.dataset.act==='sci:inv'){mode='';action('sci:hyp');return true}
+ if(b.dataset.act==='planned'&&b.textContent.includes('DATE')){mode='';$('date-start').focus?.();message='Date worksheet below the keypad.';render();return true}
+ if(b.dataset.digit==='2'){mode='';$('format-panel').open=true;$('decimal-setting').focus?.();message='Choose decimal places and number separators below the keypad.';render();return true}
+ if(b.dataset.digit==='4'){mode='';action('sci:round');return true}
+ if(b.dataset.op==='/'&&b.textContent.includes('RAND')){mode='';action('sci:random');return true}
+
+ if(b.dataset.act==='enter'){mode='';if($('format-panel').open){$('separator-setting').value=$('separator-setting').value==='US'?'EUR':'US';setFormat()}else{message='No adjustable setting selected.';render()}return true}
+ if(b.dataset.act==='cpt'){mode='';action('quit');return true}
+ if(b.dataset.act==='ce'){mode='';action('clear-work');return true}
+ if(b.dataset.act==='rcl'){mode='';action('clear-work');return true}
+ if(b.dataset.act==='up'){mode='';action('delete');return true}
+ if(b.dataset.act==='down'){mode='';action('insert');return true}
+ if(b.dataset.digit==='5'){mode='';action('work:PCT');return true}
+ if(b.dataset.digit==='6'){mode='';action('work:BREAK');return true}
+ if(b.dataset.digit==='1'){mode='';action('memory');return true}
+ if(k==='N'){mode='';action('xpy');return true}
+ if(k==='IY'){mode='';action('settings');return true}
+ if(k==='PV'){mode='';action('amort');return true}
+ if(k==='PMT'){mode='';action('timing');return true}
+ if(k==='FV'){mode='';action('clear-tvm');return true}
+ mode='';message='This second function is not implemented yet.';render();return true
+}
+
+$('date-days-button').addEventListener('click',()=>dateAction('days'));
+$('date-add-button').addEventListener('click',()=>dateAction('add'));
+$('stats-button').addEventListener('click',statsAction);
+$('bond-price-button').addEventListener('click',()=>bondAction('price'));
+$('bond-yield-button').addEventListener('click',()=>bondAction('yield'));
+
+$('decimal-setting').value=String(decimals);$('separator-setting').value=numberLocale;$('decimal-setting').addEventListener('change',setFormat);$('separator-setting').addEventListener('change',setFormat);
+$('scientific-menu').addEventListener('click',e=>{const b=e.target.closest('button[data-sci]');if(b)action('sci:'+b.dataset.sci);else{const c=e.target.closest('button[data-calc]');if(c)action(c.dataset.calc)}});
+$('work-menu').addEventListener('click',e=>{const b=e.target.closest('button[data-work]');if(b)action('work:'+b.dataset.work)});
+$('keys').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(mode==='2ND'&&b.dataset.act!=='second'){secondKey(b);return}if(b.dataset.tvm)tvm(b.dataset.tvm);else if(b.dataset.digit!==undefined){if((mode==='STO'||mode==='RCL')&&b.dataset.digit!=='.'){const n=Number(b.dataset.digit);if(mode==='STO'){registers[n]=value();persistExtra();display=registers[n];message='Stored M'+n+'.'}else{display=registers[n];message='Recalled M'+n+'.'}entry='';operandReady=true;fresh=true;mode='';render()}else input(b.dataset.digit)}else if(b.dataset.op)op(b.dataset.op);else if(b.dataset.act)action(b.dataset.act)});
+document.addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey||e.target instanceof HTMLInputElement)return;let handled=true;if(/^[0-9.]$/.test(e.key))input(e.key);else if(['+','-','*','/'].includes(e.key))op(e.key);else if(e.key==='Enter'||e.key==='=')action('enter');else if(e.key==='Backspace')action('back');else if(e.key==='Escape')action('ce');else if(e.key==='(')action('lparen');else if(e.key===')')action('rparen');else if(e.key==='%' )action('sci:percent');else handled=false;if(handled)e.preventDefault()});
+render();
+})();
+</script><script>
+(()=>{
+ const status=document.getElementById('offline-status');
+ const cacheName='financial-calculator-shell-v2026-09-28-1';
+ const home=new URL('./index.html',location.href);
+ function setStatus(message){status.textContent=message}
+ async function checkOffline(){
+  if(!('caches' in window)){setStatus('Offline caching is unavailable in this browser.');return}
+  try{const cache=await caches.open(cacheName);const ready=await cache.match(home.href);
+   setStatus(ready?(navigator.onLine?'Offline ready • calculator cached on this device':'Offline mode • calculator cached on this device'):'Online only • offline cache is not ready yet');
+  }catch(_){setStatus('Could not verify offline cache on this device.')}
+ }
+ if(!('serviceWorker' in navigator)){setStatus('Offline installation is unavailable in this browser.');return}
+ navigator.serviceWorker.register('./sw.js',{scope:'./'}).then(async()=>{
+  await navigator.serviceWorker.ready;await checkOffline();
+ }).catch(()=>setStatus('Offline setup failed. Open the hosted HTTPS page while online and reload.'));
+ navigator.serviceWorker.addEventListener('controllerchange',checkOffline);
+ window.addEventListener('online',checkOffline);window.addEventListener('offline',checkOffline);
+})();
+</script></body></html>
